@@ -24,18 +24,18 @@ export let server = {
 
         <body>
             <!-- Set up a container element for the button -->
-            <div id="paypal-button-container"></div>
+            <div id="bankio-button-container"></div>
 
-            <!-- Include the PayPal JavaScript SDK -->
-            <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+            <!-- Include the BankIO JavaScript SDK -->
+            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
 
             <script>
-                // Render the PayPal button into #paypal-button-container
-                paypal.Buttons({
+                // Render the BankIO button into #bankio-button-container
+                bankio.Buttons({
 
                     // Call your server to set up the transaction
                     createOrder: function(data, actions) {
-                        return fetch('/demo/checkout/api/paypal/order/create/', {
+                        return fetch('/demo/checkout/api/bankio/order/create/', {
                             method: 'post'
                         }).then(function(res) {
                             return res.json();
@@ -46,8 +46,14 @@ export let server = {
 
                     // Call your server to finalize the transaction
                     onApprove: function(data, actions) {
-                        return fetch('/demo/checkout/api/paypal/order/' + data.orderID + '/capture/', {
-                            method: 'post'
+                        console.log('data', data)
+                        return fetch('/demo/checkout/api/bankio/order/' + data.paymentId + '/authorised/', {
+                            method: 'post',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ code: data.code })
                         }).then(function(res) {
                             return res.json();
                         }).then(function(orderData) {
@@ -61,7 +67,7 @@ export let server = {
 
                             if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
                                 // Recoverable state, see: "Handle Funding Failures"
-                                // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                                // https://developer.bankio.com/docs/checkout/integration-features/funding-failure/
                                 return actions.restart();
                             }
 
@@ -74,12 +80,12 @@ export let server = {
                             }
 
                             // Show a success message to the buyer
-                            alert('Transaction completed by ' + orderData.payer.name.given_name);
+                            alert('Transaction completed by ' + orderData);
                         });
                     }
 
 
-                }).render('#paypal-button-container');
+                }).render('#bankio-button-container');
             </script>
         </body>
     `

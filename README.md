@@ -1,8 +1,8 @@
-# PayPal Checkout Integration Patterns Demo WebApp
+# BankIO Checkout Integration Patterns Demo WebApp
 
 ## Description
 
-The demo web application is a React app that shows different styles of PayPal integrations. It uses the wonderful [Ace Code Editor](https://github.com/ajaxorg/ace) to provide a live demonstration HTML and Javascript code which you can tweak and see rendered on the page.
+The demo web application is a React app that shows different styles of BankIO integrations. It uses the wonderful [Ace Code Editor](https://github.com/ajaxorg/ace) to provide a live demonstration HTML and Javascript code which you can tweak and see rendered on the page.
 
 ## Development
 

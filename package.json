@@ -1,7 +1,7 @@
 {
-  "name": "paypal-checkout-demo",
+  "name": "bankio-checkout-demo",
   "version": "1.0.30",
-  "description": "Demo application for paypal checkout",
+  "description": "Demo application for bankio checkout",
   "main": "src/app/server/index.js",
   "files": [
     "src/"
@@ -14,19 +14,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paypal/paypal-checkout-demo.git"
+    "url": "git+https://github.com/bankio/bankio-checkout-demo.git"
   },
   "keywords": [
-    "paypal",
+    "bankio",
     "checkout",
     "demo"
   ],
   "author": "Andrew Throener",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/paypal/paypal-checkout-demo/issues"
+    "url": "https://github.com/bankio/bankio-checkout-demo/issues"
   },
-  "homepage": "https://github.com/paypal/paypal-checkout-demo#readme",
+  "homepage": "https://github.com/bankio/bankio-checkout-demo#readme",
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
@@ -40,10 +40,13 @@
     "belter": "^1.0.92",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
+    "moment": "^2.27.0",
+    "querystring": "^0.2.0",
     "react": "^16",
     "react-dom": "^16",
     "react-router": "^3.0.2",
     "request": "^2.81.0",
+    "uuid": "^8.2.0",
     "zalgo-promise": "^1.0.38"
   }
 }

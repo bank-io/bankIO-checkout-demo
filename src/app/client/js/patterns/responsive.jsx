@@ -24,14 +24,14 @@ export let responsive = {
             <style>
                 /* Media query for mobile viewport */
                 @media screen and (max-width: 400px) {
-                    #paypal-button-container {
+                    #bankio-button-container {
                         width: 100%;
                     }
                 }
                 
                 /* Media query for desktop viewport */
                 @media screen and (min-width: 400px) {
-                    #paypal-button-container {
+                    #bankio-button-container {
                         width: 250px;
                     }
                 }
@@ -40,14 +40,14 @@ export let responsive = {
 
         <body>
             <!-- Set up a container element for the button -->
-            <div id="paypal-button-container"></div>
+            <div id="bankio-button-container"></div>
 
-            <!-- Include the PayPal JavaScript SDK -->
-            <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+            <!-- Include the BankIO JavaScript SDK -->
+            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
 
             <script>
-                // Render the PayPal button into #paypal-button-container
-                paypal.Buttons().render('#paypal-button-container');
+                // Render the BankIO button into #bankio-button-container
+                bankio.Buttons().render('#bankio-button-container');
             </script>
         </body>
     `

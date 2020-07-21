@@ -1,8 +1,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular.js"></script>
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="https://www.bankioobjects.com/api/checkout.js"></script>
 
 <script>
-    angular.module('app', ['paypal-button']).controller('appController', function($scope) {
+    angular.module('app', ['bankio-button']).controller('appController', function($scope) {
 
         $scope.opts = {
 
@@ -18,7 +18,7 @@
                 var env    = this.props.env;
                 var client = this.props.client;
 
-                return paypal.rest.payment.create(env, client, {
+                return bankio.rest.payment.create(env, client, {
                     transactions: [
                         {
                             amount: { total: '1.00', currency: 'USD' }
@@ -44,6 +44,6 @@
 
 <body ng-app="app" ng-controller="appController">
 
-    <paypal-button env="opts.env" client="opts.client" payment="opts.payment" commit="opts.commit" on-authorize="opts.onAuthorize"></paypal-button>
+    <bankio-button env="opts.env" client="opts.client" payment="opts.payment" commit="opts.commit" on-authorize="opts.onAuthorize"></bankio-button>
 
 </body>

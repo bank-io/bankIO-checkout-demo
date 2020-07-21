@@ -5,14 +5,14 @@ module.exports = {
     },
 
     urls : {
-        sandbox: 'https://www.sandbox.paypal.com',
-        stage: 'https://www.msmaster.qa.paypal.com'
+        sandbox: 'https://dev.bankio.ro:8443',
+        stage: 'https://www.msmaster.qa.bankio.com'
     },
 
     apis: {
-        auth: '/v1/oauth2/token',
-        payment: '/v1/payments/payment',
-        orders: '/v2/checkout/orders',
+        auth: '/api/auth/token',
+        payment: '/api/org/bankio/v1/payments/domestic',
+        orders: '/api/org/bankio/v1/payments/domestic',
         billing: '/v1/payments/billing-agreements',
         billingPlans: '/v1/payments/billing-plans'
     },
@@ -41,7 +41,7 @@ module.exports = {
             'js/serverside.js',
             'img/watch.jpeg',
             'img/accepted_cards.png',
-            'img/payWithPaypal.jpg',
+            'img/payWithBankIO.jpg',
             'css/main.css'
         ],
         secret: 'secretSanta' // for you to fill out
@@ -51,11 +51,11 @@ module.exports = {
         createReq: {
             "intent": "sale",
             "payer": {
-                "payment_method": "paypal"
+                "payment_method": "bankio"
             },
             "redirect_urls": {
-                "cancel_url": "https://www.sandbox.paypal.com",
-                "return_url": "https://www.sandbox.paypal.com"
+                "cancel_url": "https://www.sandbox.bankio.com",
+                "return_url": "https://www.sandbox.bankio.com"
             },
             "transactions": [
                 {
@@ -75,7 +75,7 @@ module.exports = {
             "start_date": "2017-12-19T00:37:04Z",
             "plan": {},
             "payer": {
-                "payment_method": "paypal"
+                "payment_method": "bankio"
             }
         },
 
@@ -144,8 +144,8 @@ module.exports = {
                     "value": "1",
                     "currency": "USD"
                 },
-                "return_url": "https://www.sandbox.paypal.com",
-                "cancel_url": "https://www.sandbox.paypal.com",
+                "return_url": "https://www.sandbox.bankio.com",
+                "cancel_url": "https://www.sandbox.bankio.com",
                 "auto_bill_amount": "YES",
                 "initial_fail_amount_action": "CONTINUE",
                 "max_fail_attempts": "0"

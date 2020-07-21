@@ -7,8 +7,8 @@ const config = require('./config');
 const PORT = 8002;
 const serverConfig = {
     sandboxCredentials: {
-        clientID: process.env.PAYPAL_CHECKOUT_DEMO_CLIENT_ID || config.client.sandbox,
-        secret: process.env.PAYPAL_CHECKOUT_DEMO_CLIENT_SECRET || ''
+        clientID: process.env.BANKIO_CHECKOUT_DEMO_CLIENT_ID || config.client.sandbox,
+        secret: process.env.BANKIO_CHECKOUT_DEMO_CLIENT_SECRET || ''
     }
 }
 

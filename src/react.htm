@@ -3,7 +3,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.js"></script>
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="https://www.bankioobjects.com/api/checkout.js"></script>
 
 <div id="page"></div>
 
@@ -27,7 +27,7 @@
                         let env    = this.props.env;
                         let client = this.props.client;
 
-                        return paypal.rest.payment.create(env, client, {
+                        return bankio.rest.payment.create(env, client, {
                             transactions: [
                                 {
                                     amount: { total: '1.00', currency: 'USD' }
@@ -50,7 +50,7 @@
 
                 return (
                     <div>
-                        <paypal.Button.react env={opts.env} client={opts.client} payment={opts.payment} commit={opts.commit} onAuthorize={opts.onAuthorize} />
+                        <bankio.Button.react env={opts.env} client={opts.client} payment={opts.payment} commit={opts.commit} onAuthorize={opts.onAuthorize} />
                     </div>
                 );
             }

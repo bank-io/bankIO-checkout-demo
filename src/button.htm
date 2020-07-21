@@ -1,10 +1,10 @@
 
-<div id="paypal-button"></div>
+<div id="bankio-button"></div>
 
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script src="https://www.bankioobjects.com/api/checkout.js"></script>
 
 <script>
-    paypal.Button.render({
+    bankio.Button.render({
 
         env: 'production', // Optional: specify 'sandbox' environment
 
@@ -18,7 +18,7 @@
             var env    = this.props.env;
             var client = this.props.client;
 
-            return paypal.rest.payment.create(env, client, {
+            return bankio.rest.payment.create(env, client, {
                 transactions: [
                     {
                         amount: { total: '1.00', currency: 'USD' }
@@ -38,5 +38,5 @@
             });
         }
 
-    }, '#paypal-button');
+    }, '#bankio-button');
 </script>

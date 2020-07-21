@@ -6,6 +6,6 @@ services:
     ports:
       - "8002:8002"
     volumes:
-      - .:/paypal-checkout-demo
+      - .:/bankio-checkout-demo
     environment:
       - PORT=8002

@@ -26,8 +26,8 @@ export let radio = {
             <!-- Render the radio fields and button containers -->
 
             <label>
-                <input type="radio" name="payment-option" value="paypal" checked>
-                <img src="/demo/checkout/static/img/paypal-mark.jpg" alt="Pay with Paypal">
+                <input type="radio" name="payment-option" value="bankio" checked>
+                <img src="/demo/checkout/static/img/bankio-mark.jpg" alt="Pay with BankIO">
             </label>
 
             <label>
@@ -35,40 +35,40 @@ export let radio = {
                 <img src="/demo/checkout/static/img/card-mark.png" alt="Accepting Visa, Mastercard, Discover and American Express">
             </label>
 
-            <div id="paypal-button-container"></div>
+            <div id="bankio-button-container"></div>
             <div id="card-button-container" class="hidden"><button>Continue</button></div>
 
-            <!-- Include the PayPal JavaScript SDK -->
-            <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+            <!-- Include the BankIO JavaScript SDK -->
+            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
 
             <script>
                 // Listen for changes to the radio fields
                 document.querySelectorAll('input[name=payment-option]').forEach(function(el) {
                     el.addEventListener('change', function(event) {
 
-                        // If PayPal is selected, show the PayPal button
-                        if (event.target.value === 'paypal') {
+                        // If BankIO is selected, show the BankIO button
+                        if (event.target.value === 'bankio') {
                             document.querySelector('#card-button-container').style.display = 'none';
-                            document.querySelector('#paypal-button-container').style.display = 'inline-block';
+                            document.querySelector('#bankio-button-container').style.display = 'inline-block';
                         }
 
                         // If Card is selected, show the standard continue button
                         if (event.target.value === 'card') {
                             document.querySelector('#card-button-container').style.display = 'inline-block';
-                            document.querySelector('#paypal-button-container').style.display = 'none';
+                            document.querySelector('#bankio-button-container').style.display = 'none';
                         }
                     });
                 });
 
-                // Hide Non-PayPal button by default
+                // Hide Non-BankIO button by default
                 document.querySelector('#card-button-container').style.display = 'none';
 
-                // Render the PayPal button into #paypal-button-container
-                paypal.Buttons({
+                // Render the BankIO button into #bankio-button-container
+                bankio.Buttons({
                     style: {
                         layout: 'horizontal'
                     }
-                }).render('#paypal-button-container');
+                }).render('#bankio-button-container');
             </script>
         </body>
     `

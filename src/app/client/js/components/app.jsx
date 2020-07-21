@@ -19,7 +19,7 @@ let layout = [
     {
         name: 'Features',
         patterns: [
-            patterns.horizontal, patterns.style, patterns.responsive, patterns.radio
+            patterns.horizontal, patterns.style, patterns.responsive, patterns.radio, patterns.validation
         ]
     }
 ];

@@ -1,4 +1,4 @@
-const paypal = require('./lib/paypal');
+const bankio = require('./lib/bankio');
 const config = require('./config');
 
 const index = require('./page/index');
@@ -6,7 +6,7 @@ const index = require('./page/index');
 module.exports = function (app) {
 
     app.get('/', (req, res) => {
-        res.header('Content-Security-Policy', `default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://*.paypal.com https://*.paypalobjects.com https://*.braintreegateway.com`);
+        res.header('Content-Security-Policy', `default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://*.bankio.ro https://*.bankio.ro:*`);
 
         res.send(index({
             baseURL: req.baseUrl,
@@ -14,11 +14,11 @@ module.exports = function (app) {
         }));
     });
 
-    app.post('/api/paypal/order/create/', (req, res) => {
+    app.post('/api/bankio/order/create/', (req, res) => {
         const { clientID, secret } = req.sandboxCredentials;
 
-        return paypal.getAccessToken(clientID, secret)
-            .then(paypal.createOrder)
+        return bankio.getAccessToken(clientID, secret)
+            .then(bankio.createOrder)
             .then(response => {
                 res.json({ id: response });
             })
@@ -32,13 +32,33 @@ module.exports = function (app) {
             });
     });
 
-    app.post('/api/paypal/order/:id/capture/', (req, res) => {
+    app.post('/api/bankio/order/:id/authorised/', (req, res) => {
+        const paymentId = req.params.id;
+        const { clientID, secret } = req.sandboxCredentials;
+        console.log('test');
+
+        return bankio.authorisePaymentAccessToken(clientID, secret, paymentId, req.body.code)
+            .then(response => {
+                res.json(response);
+            })
+            .catch(err => {
+                if (typeof err === 'object') {
+                    res.status(500).json(err);
+                } else {
+                    const error = err || err.message;
+                    res.status(500).send(`Could not complete payment, ${error}`);
+                }
+            });
+    });
+
+    app.post('/api/bankio/order/:id/capture/', (req, res) => {
         const orderID = req.params.id;
         const { clientID, secret } = req.sandboxCredentials;
+        console.log('test');
 
-        return paypal.getAccessToken(clientID, secret)
+        return bankio.getPaymentAccessToken(orderID)
             .then(accessToken => {
-                return paypal.captureOrder(accessToken, orderID);
+                return bankio.captureOrder(accessToken, orderID);
             })
             .then(response => {
                 res.json(response);

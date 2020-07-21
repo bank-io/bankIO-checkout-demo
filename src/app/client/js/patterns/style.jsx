@@ -24,14 +24,14 @@ export let style = {
 
         <body>
             <!-- Set up a container element for the button -->
-            <div id="paypal-button-container"></div>
+            <div id="bankio-button-container"></div>
 
-            <!-- Include the PayPal JavaScript SDK -->
-            <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+            <!-- Include the BankIO JavaScript SDK -->
+            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
 
             <script>
-                // Render the PayPal button into #paypal-button-container
-                paypal.Buttons({
+                // Render the BankIO button into #bankio-button-container
+                bankio.Buttons({
 
                     style: {
                         color:  'blue',
@@ -40,7 +40,7 @@ export let style = {
                         height: 40
                     }
 
-                }).render('#paypal-button-container');
+                }).render('#bankio-button-container');
             </script>
         </body>
     `

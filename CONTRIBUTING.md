@@ -1,4 +1,4 @@
-# Contributing to paypal-checkout-demo
+# Contributing to bankio-checkout-demo
 
 We are always looking for ways to make our demo site better. Adding features and fixing bugs allows everyone who depends on this code to create better, more stable applications.
 Feel free to raise a pull request to us. Our team would review your proposed modifications and, if appropriate, merge
@@ -10,13 +10,13 @@ your changes into our code. Ideas and other comments are also welcome.
 
 ```bash
 # Clone it
-$ git clone git@github.com:me/paypal-checkout-demo.git
+$ git clone git@github.com:me/bankio-checkout-demo.git
 
 # Change directory
-$ cd paypal-checkout-demo
+$ cd bankio-checkout-demo
 
 # Add the upstream repo
-$ git remote add upstream git@github.com:paypal/paypal-checkout-demo.git
+$ git remote add upstream git@github.com:bankio/bankio-checkout-demo.git
 
 # Get the latest upstream changes
 $ git pull upstream
@@ -36,6 +36,6 @@ $ npm install
 1. Push your topic branch up to your fork: `$ git push origin <topic-branch-name>`.
 1. Open a [Pull Request](https://help.github.com/articles/using-pull-requests) with a clear title and description.
 
-If you have any questions about contributing, please feel free to contact us by posting your questions using a [GitHub issue](https://github.com/paypal/paypal-checkout-demo/issues).
+If you have any questions about contributing, please feel free to contact us by posting your questions using a [GitHub issue](https://github.com/bankio/bankio-checkout-demo/issues).
 
-Copyright 2017, PayPal under [the Apache 2.0 license](LICENSE.txt).
+Copyright 2017, BankIO under [the Apache 2.0 license](LICENSE.txt).

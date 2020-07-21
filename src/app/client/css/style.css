@@ -1,7 +1,7 @@
 @font-face {
     font-family: "pp-sans-big-light";
-    src: url("https://www.paypalobjects.com/webstatic/mktg/2014design/font/PP-Sans/PayPalSansBig-Light.eot");
-    src: url("https://www.paypalobjects.com/webstatic/mktg/2014design/font/PP-Sans/PayPalSansBig-Light.eot?#iefix") format("embedded-opentype"), url("https://www.paypalobjects.com/webstatic/mktg/2014design/font/PP-Sans/PayPalSansBig-Light.woff") format("woff"), url("https://www.paypalobjects.com/webstatic/mktg/2014design/font/headlinedark/festivo1.ttf") format("truetype"), url("https://www.paypalobjects.com/webstatic/mktg/2014design/font/PP-Sans/PayPalSansBig-Light.svg") format("svg");
+    src: url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/PP-Sans/BankIOSansBig-Light.eot");
+    src: url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/PP-Sans/BankIOSansBig-Light.eot?#iefix") format("embedded-opentype"), url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/PP-Sans/BankIOSansBig-Light.woff") format("woff"), url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/headlinedark/festivo1.ttf") format("truetype"), url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/PP-Sans/BankIOSansBig-Light.svg") format("svg");
 }
 
 html, body {
@@ -305,7 +305,7 @@ a.active .bullet {
     height: 40px;
 }
 
-#paypal-button-container {
+#bankio-button-container {
     margin-top: 20px;
     width: 300px;
     display: inline-block;
