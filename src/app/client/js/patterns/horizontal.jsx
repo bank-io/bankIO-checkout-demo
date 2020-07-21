@@ -1,25 +1,27 @@
-
 import React from 'react';
 
 export let horizontal = {
+  slug: 'horizontal',
 
-    slug: 'horizontal',
+  name: `Horizontal`,
 
-    name: `Horizontal`,
+  fullName: `Horizontal Button`,
 
-    fullName: `Horizontal Button`,
+  intro: (
+    <p>
+      Create horizontal <b>Smart Payment Buttons</b>
+    </p>
+  ),
 
-    intro: (
-        <p>Create horizontal <b>Smart Payment Buttons</b></p>
-    ),
-
-    code: (ctx) => `
+  code: (ctx) => `
         <!DOCTYPE html>
+        <html lang="en">
 
         <head>
             <!-- Add meta tags for mobile and IE -->
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <title> PayPal Smart Payment Buttons Integration | Horizontal Buttons </title>
         </head>
 
         <body>
@@ -38,5 +40,7 @@ export let horizontal = {
                 }).render('#bankio-button-container');
             </script>
         </body>
+
+        </html>
     `
 };

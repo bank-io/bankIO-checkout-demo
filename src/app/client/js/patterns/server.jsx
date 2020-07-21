@@ -1,25 +1,27 @@
-
 import React from 'react';
 
 export let server = {
+  slug: 'server',
 
-    slug: 'server',
+  name: `Server`,
 
-    name: `Server`,
+  fullName: `Server integration`,
 
-    fullName: `Server integration`,
+  intro: (
+    <p>
+      Create horizontal <b>Smart Payment Buttons which call your server</b>
+    </p>
+  ),
 
-    intro: (
-        <p>Create horizontal <b>Smart Payment Buttons which call your server</b></p>
-    ),
-
-    code: (ctx) => `
+  code: (ctx) => `
         <!DOCTYPE html>
+        <html lang="en">
 
         <head>
             <!-- Add meta tags for mobile and IE -->
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <title> PayPal Smart Payment Buttons Integration | Server Demo </title>
         </head>
 
         <body>
@@ -88,5 +90,7 @@ export let server = {
                 }).render('#bankio-button-container');
             </script>
         </body>
+
+        </html>
     `
 };

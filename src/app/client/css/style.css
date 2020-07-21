@@ -1,10 +1,18 @@
 @font-face {
-    font-family: "pp-sans-big-light";
-    src: url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/PP-Sans/BankIOSansBig-Light.eot");
-    src: url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/PP-Sans/BankIOSansBig-Light.eot?#iefix") format("embedded-opentype"), url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/PP-Sans/BankIOSansBig-Light.woff") format("woff"), url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/headlinedark/festivo1.ttf") format("truetype"), url("https://www.bankioobjects.com/webstatic/mktg/2014design/font/PP-Sans/BankIOSansBig-Light.svg") format("svg");
+  font-family: 'pp-sans-big-light';
+  src: url('https://www.paypalobjects.com/webstatic/mktg/2014design/font/PP-Sans/PayPalSansBig-Light.eot');
+  src: url('https://www.paypalobjects.com/webstatic/mktg/2014design/font/PP-Sans/PayPalSansBig-Light.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://www.paypalobjects.com/webstatic/mktg/2014design/font/PP-Sans/PayPalSansBig-Light.woff')
+      format('woff'),
+    url('https://www.paypalobjects.com/webstatic/mktg/2014design/font/headlinedark/festivo1.ttf')
+      format('truetype'),
+    url('https://www.paypalobjects.com/webstatic/mktg/2014design/font/PP-Sans/PayPalSansBig-Light.svg')
+      format('svg');
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     min-height: 100%;
@@ -37,7 +45,8 @@ span.pre {
     margin: 0;
     min-height: 100%;
     height: 100%;
-    font-family: "pp-sans-big-light", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'pp-sans-big-light', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
 }
 
 .app > div {
@@ -110,7 +119,6 @@ span.pre {
 }
 
 .app header .toggle-component.left .toggle .switch {
-
 }
 
 .app header .toggle-component.right .toggle .switch {
@@ -229,7 +237,6 @@ a.active .bullet {
 }
 
 .app .main .column-middle .demo .steps {
-
 }
 
 .app .main .column-middle .demo h3 {
@@ -249,7 +256,6 @@ a.active .bullet {
 .app .main .column-middle .demo p {
     line-height: 26px;
 }
-
 
 .app .main .column-middle .demo .pre {
     line-height: 14px;
@@ -287,9 +293,6 @@ a.active .bullet {
     height: 100%;
 }
 
-
-
-
 .app .main .column-middle .demo .code.radio label {
     display: block;
     border-bottom: 1px solid #eee;
@@ -315,8 +318,6 @@ a.active .bullet {
     margin-top: 20px;
     min-height: 52px;
 }
-
-
 
 .demo .step {
     font-size: 16px;
@@ -355,7 +356,8 @@ a.active .bullet {
 }
 
 @media screen and (max-width: 650px) {
-    html, body {
+  html,
+  body {
         min-width: 100%;
         height: 100%;
     }
@@ -406,7 +408,8 @@ a.active .bullet {
         height: 100%;
     }
 
-    .app .main .column-middle, .app .main .column-right {
+  .app .main .column-middle,
+  .app .main .column-right {
         width: 100%;
         min-width: 100%;
     }
@@ -417,10 +420,10 @@ a.active .bullet {
     height: 40px;
     width: 40px;
     box-sizing: border-box;
-    border: 3px solid rgba(0, 0, 0, .2);
+  border: 3px solid rgba(0, 0, 0, 0.2);
     border-top-color: rgba(33, 128, 192, 0.8);
     border-radius: 100%;
-    animation: rotation .7s infinite linear;
+  animation: rotation 0.7s infinite linear;
 }
 
 @keyframes rotation {

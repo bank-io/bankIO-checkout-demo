@@ -1,25 +1,27 @@
-
 import React from 'react';
 
 export let radio = {
+  slug: 'radio',
 
-    slug: 'radio',
+  name: `Radio Fields`,
 
-    name: `Radio Fields`,
+  fullName: `Radio Fields`,
 
-    fullName: `Radio Fields`,
+  intro: (
+    <p>
+      Create <b>Smart Payment Buttons</b> with radio fields
+    </p>
+  ),
 
-    intro: (
-        <p>Create <b>Smart Payment Buttons</b> with radio fields</p>
-    ),
-
-    code: (ctx) => `
+  code: (ctx) => `
         <!DOCTYPE html>
+        <html lang="en">
 
         <head>
             <!-- Add meta tags for mobile and IE -->
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <title> PayPal Smart Payment Buttons Integration | Radio Fields </title>
         </head>
 
         <body>
@@ -71,5 +73,7 @@ export let radio = {
                 }).render('#bankio-button-container');
             </script>
         </body>
+
+        </html>
     `
 };

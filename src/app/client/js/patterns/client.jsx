@@ -1,25 +1,27 @@
-
 import React from 'react';
 
 export let client = {
+  slug: 'client',
 
-    slug: 'client',
+  name: `Client`,
 
-    name: `Client`,
+  fullName: `Client integration`,
 
-    fullName: `Client integration`,
+  intro: (
+    <p>
+      Create <b>Smart Payment Buttons</b>
+    </p>
+  ),
 
-    intro: (
-        <p>Create <b>Smart Payment Buttons</b></p>
-    ),
-
-    code: (ctx) => `
+  code: (ctx) => `
         <!DOCTYPE html>
+        <html lang="en">
 
         <head>
             <!-- Add meta tags for mobile and IE -->
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <title> PayPal Smart Payment Buttons Integration | Client Demo </title>
         </head>
 
         <body>
@@ -56,5 +58,7 @@ export let client = {
                 }).render('#bankio-button-container');
             </script>
         </body>
+
+        </html>
     `
 };

@@ -1,28 +1,32 @@
-const bankio = require('./lib/bankio');
-const config = require('./config');
+const paypal = require('./lib/paypal');
 
 const index = require('./page/index');
 
 module.exports = function (app) {
-
     app.get('/', (req, res) => {
-        res.header('Content-Security-Policy', `default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://*.bankio.ro https://*.bankio.ro:*`);
+    res.header(
+      'Content-Security-Policy',
+      `default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://*.paypal.com https://*.paypalobjects.com https://*.braintreegateway.com;`
+    );
 
-        res.send(index({
+    res.send(
+      index({
             baseURL: req.baseUrl,
-            csrf: res.locals._csrf
-        }));
+        csrf: res.locals._csrf,
+      })
+    );
     });
 
     app.post('/api/bankio/order/create/', (req, res) => {
         const { clientID, secret } = req.sandboxCredentials;
 
-        return bankio.getAccessToken(clientID, secret)
-            .then(bankio.createOrder)
-            .then(response => {
+    return paypal
+      .getAccessToken(clientID, secret)
+      .then(paypal.createOrder)
+      .then((response) => {
                 res.json({ id: response });
             })
-            .catch(err => {
+      .catch((err) => {
                 if (typeof err === 'object') {
                     res.status(500).json(err);
                 } else {
@@ -56,14 +60,15 @@ module.exports = function (app) {
         const { clientID, secret } = req.sandboxCredentials;
         console.log('test');
 
-        return bankio.getPaymentAccessToken(orderID)
-            .then(accessToken => {
+    return paypal
+      .getAccessToken(clientID, secret)
+      .then((accessToken) => {
                 return bankio.captureOrder(accessToken, orderID);
             })
-            .then(response => {
+      .then((response) => {
                 res.json(response);
             })
-            .catch(err => {
+      .catch((err) => {
                 if (typeof err === 'object') {
                     res.status(500).json(err);
                 } else {

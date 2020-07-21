@@ -1,25 +1,27 @@
-
 import React from 'react';
 
 export let responsive = {
+  slug: 'responsive',
 
-    slug: 'responsive',
+  name: `Responsive`,
 
-    name: `Responsive`,
+  fullName: `Responsive Buttons`,
 
-    fullName: `Responsive Buttons`,
+  intro: (
+    <p>
+      Create responsive <b>Smart Payment Buttons</b>
+    </p>
+  ),
 
-    intro: (
-        <p>Create responsive <b>Smart Payment Buttons</b></p>
-    ),
-
-    code: (ctx) => `
+  code: (ctx) => `
         <!DOCTYPE html>
+        <html lang="en">
 
         <head>
             <!-- Add meta tags for mobile and IE -->
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <title> PayPal Smart Payment Buttons Integration | Responsive Buttons </title>
 
             <style>
                 /* Media query for mobile viewport */
@@ -50,5 +52,7 @@ export let responsive = {
                 bankio.Buttons().render('#bankio-button-container');
             </script>
         </body>
+
+        </html>
     `
 };
