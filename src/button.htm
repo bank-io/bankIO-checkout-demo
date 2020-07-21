@@ -3,7 +3,7 @@
 <script src="https://www.bankioobjects.com/api/checkout.js"></script>
 
 <script>
-  paypal.Button.render(
+  bankio.Button.render(
     {
         env: 'production', // Optional: specify 'sandbox' environment
 
@@ -37,6 +37,6 @@
             });
       },
     },
-    '#paypal-button'
+    '#bankio-button'
   );
 </script>

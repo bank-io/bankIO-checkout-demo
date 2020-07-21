@@ -3,7 +3,7 @@
 
 <script>
   angular
-    .module('app', ['paypal-button'])
+    .module('app', ['bankio-button'])
     .controller('appController', function ($scope) {
         $scope.opts = {
             env: 'production',
@@ -42,11 +42,11 @@
 </script>
 
 <body ng-app="app" ng-controller="appController">
-  <paypal-button
+  <bankio-button
     env="opts.env"
     client="opts.client"
     payment="opts.payment"
     commit="opts.commit"
     on-authorize="opts.onAuthorize"
-  ></paypal-button>
+  ></bankio-button>
 </body>
