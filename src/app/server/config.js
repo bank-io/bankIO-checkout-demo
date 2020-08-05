@@ -6,14 +6,14 @@ module.exports = {
   },
 
   urls: {
-    sandbox: 'https://www.sandbox.bankio.com',
+    sandbox: 'https://ob.bankio.ro',
     stage: 'https://www.msmaster.qa.bankio.com',
   },
 
   apis: {
-    auth: '/v1/oauth2/token',
+    auth: '/api/auth/token',
     payment: '/v1/payments/payment',
-    orders: '/v2/checkout/orders',
+    orders: '/api/org/bankio/v1/payments/sepa-credit-transfers',
     billing: '/v1/payments/billing-agreements',
     billingPlans: '/v1/payments/billing-plans',
   },

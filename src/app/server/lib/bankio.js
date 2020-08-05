@@ -65,8 +65,6 @@ module.exports = {
           if (error) return reject(error);
           if (res.statusCode >= 400) return reject(body);
 
-          console.log(body)
-
           return resolve(body && body.paymentId);
         }
       );
@@ -111,7 +109,7 @@ module.exports = {
             Authorization: `Basic ${encodedClientCredentials}`,
             "Content-Type": "application/x-www-form-urlencoded",
           },
-          body: "grant_type=client_credentials",
+          body: "grant_type=client_credentials&scope=pisp offline_access",
           json: true,
         },
         (error, res, body) => {

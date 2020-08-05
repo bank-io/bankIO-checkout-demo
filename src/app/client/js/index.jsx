@@ -17,7 +17,7 @@ window.fetch = newFetch;
 
 render(
   <HashRouter>
-    <Route path="/" component={App} />
+    {/* <Route path="/" component={App} /> */}
     <Route path="/pattern/:pattern" component={App} />
   </HashRouter>,
   document.getElementById('app')

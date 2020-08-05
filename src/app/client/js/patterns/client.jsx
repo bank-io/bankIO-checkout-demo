@@ -29,7 +29,8 @@ export let client = {
             <div id="bankio-button-container"></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
+            <!-- <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>-->
+            <script src="https://bankio.ro/sdk.js?client-id=sb4&currency=USD"></script>
 
             <script>
                 // Render the BankIO button into #bankio-button-container

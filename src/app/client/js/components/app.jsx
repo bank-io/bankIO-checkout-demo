@@ -58,7 +58,7 @@ export class App extends React.Component {
     }
 
     render() {
-        let patternName = this.props.params.pattern || 'client';
+        let patternName = this.props.match.params.pattern || 'client';
         let activePattern = patterns[patternName];
 
         if (!activePattern) {

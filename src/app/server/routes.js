@@ -6,7 +6,7 @@ module.exports = function (app) {
     app.get('/', (req, res) => {
     res.header(
       'Content-Security-Policy',
-      `default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://*.bankio.com https://*.bankioobjects.com https://*.braintreegateway.com;`
+      `default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://*.bankio.ro https://*.bankio.ro:8000 https://bankio.ro https://bankio.co.uk;`
     );
 
     res.send(
@@ -27,6 +27,7 @@ module.exports = function (app) {
                 res.json({ id: response });
             })
       .catch((err) => {
+          console.error(err)
                 if (typeof err === 'object') {
                     res.status(500).json(err);
                 } else {
