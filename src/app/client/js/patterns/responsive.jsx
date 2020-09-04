@@ -25,14 +25,14 @@ export let responsive = {
 
             <style>
                 /* Media query for mobile viewport */
-                @media screen and (max-width: 400px) {
+                @media screen and (max-width: 600px) {
                     #bankio-button-container {
                         width: 100%;
                     }
                 }
                 
                 /* Media query for desktop viewport */
-                @media screen and (min-width: 400px) {
+                @media screen and (min-width: 600px) {
                     #bankio-button-container {
                         width: 250px;
                     }
@@ -45,7 +45,7 @@ export let responsive = {
             <div id="bankio-button-container"></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
+            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}&currency=USD"></script>
 
             <script>
                 // Render the BankIO button into #bankio-button-container

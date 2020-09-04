@@ -9,7 +9,7 @@ export let server = {
 
   intro: (
     <p>
-      Create horizontal <b>Smart Payment Buttons which call your server</b>
+      Create <b>Smart Payment Buttons which call your server</b>
     </p>
   ),
 
@@ -29,8 +29,7 @@ export let server = {
             <div id="bankio-button-container"></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <!-- <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script> -->
-            <script src="https://bankio.ro/sdk.js?client-id=sb4&currency=USD"></script>
+            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}&currency=USD"></script>
 
             <script>
                 // Render the BankIO button into #bankio-button-container
@@ -38,7 +37,7 @@ export let server = {
 
                     // Call your server to set up the transaction
                     createOrder: function(data, actions) {
-                        return fetch('/demo/checkout/api/bankio/order/create/', {
+                        return fetch('/api/bankio/order/create/', {
                             method: 'post'
                         }).then(function(res) {
                             return res.json();
@@ -50,7 +49,7 @@ export let server = {
                     // Call your server to finalize the transaction
                     onApprove: function(data, actions) {
                         console.log('data', data)
-                        return fetch('/demo/checkout/api/bankio/order/' + data.paymentId + '/authorised/', {
+                        return fetch('/api/bankio/order/' + data.paymentId + '/authorised/', {
                             method: 'post',
                             headers: {
                                 'Accept': 'application/json',

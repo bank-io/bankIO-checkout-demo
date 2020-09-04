@@ -10,17 +10,17 @@ import * as patterns from '../patterns';
 let layout = [
     {
         name: 'Integration',
-    patterns: [patterns.client, patterns.server],
+        patterns: [patterns.server],
     },
 
     {
         name: 'Features',
         patterns: [
-      patterns.horizontal,
-      patterns.style,
-      patterns.responsive,
-      patterns.radio,
-    ],
+          patterns.style,
+          patterns.responsive,
+          patterns.validation,
+          patterns.radio,
+        ],
   },
 ];
 
@@ -35,12 +35,6 @@ export class App extends React.Component {
 
     onChangeCode(code) {
         this.setState({ code, errors: [] });
-    }
-
-    componentWillMount() {
-        if (window.location.hash === '#/') {
-            window.location.hash = '#/pattern/client';
-        }
     }
 
     onChangeEnv(env) {
@@ -58,15 +52,16 @@ export class App extends React.Component {
     }
 
     render() {
-        let patternName = this.props.match.params.pattern || 'client';
+        let patternName = this.props.match.params.pattern || 'server';
         let activePattern = patterns[patternName];
 
         if (!activePattern) {
-            activePattern = patterns.client;
+            activePattern = patterns.server;
         }
 
         let env = this.state.env;
         let baseURL = document.body.getAttribute('data-base-url');
+        let clientID = document.body.getAttribute('data-client-id');
 
         return (
             <div>
@@ -132,7 +127,7 @@ export class App extends React.Component {
 
                     <div className="column-right">
             <Editor
-              code={activePattern.code({ env, baseURL })}
+              code={activePattern.code({ env, baseURL, clientID })}
               onChange={(val) => this.onChangeCode(val)}
             />
                     </div>
