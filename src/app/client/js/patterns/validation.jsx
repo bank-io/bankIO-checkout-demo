@@ -1,19 +1,19 @@
-
 import React from 'react';
 
 export let validation = {
+  slug: 'validation',
 
-    slug: 'validation',
+  name: `Validation`,
 
-    name: `Validation`,
+  fullName: `Validation integration`,
 
-    fullName: `Validation integration`,
+  intro: (
+    <p>
+      Create <b>Smart Payment Buttons</b>
+    </p>
+  ),
 
-    intro: (
-        <p>Create <b>Smart Payment Buttons</b></p>
-    ),
-
-    code: (ctx) => `
+  code: (ctx) => `
         <!DOCTYPE html>
 
         <head>
@@ -24,17 +24,19 @@ export let validation = {
 
         <body>
             <!-- Set up a container element for the button -->
+            <p id="error" class="hidden">Please check the checkbox</p>
+            <p>
+              <label><input id="check" type="checkbox"> Check here to continue</label>    
+            </p>
+
             <div id="bankio-button-container"></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
-
-            <p id="error" class="hidden">Please check the checkbox</p>
-            <label><input id="check" type="checkbox"> Check here to continue</label>
+            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}&currency=USD"></script>
 
             <script>
                 // Render the BankIO button into #bankio-button-container
-                 bankio.Buttons({
+                  bankio.Buttons({
 
                 // onInit is called when the button first renders
                 onInit: function(data, actions) {
@@ -70,5 +72,5 @@ export let validation = {
                 }).render('#bankio-button-container');
             </script>
         </body>
-    `
+    `,
 };

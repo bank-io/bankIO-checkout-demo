@@ -1,8 +1,8 @@
-const request = require("request");
-const config = require("../config");
-const { v4: uuidv4 } = require("uuid");
-const moment = require("moment");
-const querystring = require("querystring");
+const request = require('request');
+const config = require('../config');
+const { v4: uuidv4 } = require('uuid');
+const moment = require('moment');
+const querystring = require('querystring');
 
 module.exports = {
   createOrder: (accessToken) => {
@@ -12,42 +12,45 @@ module.exports = {
 
     const formattedAmount = amount.toFixed(2);
 
-        let transactionDate = moment();
+    let transactionDate = moment();
 
-        if (transactionDate.isoWeekday() >= 6) {
-          transactionDate = transactionDate.add(8 - transactionDate.isoWeekday(), "days");
-        }
+    if (transactionDate.isoWeekday() >= 6) {
+      transactionDate = transactionDate.add(
+        8 - transactionDate.isoWeekday(),
+        'days'
+      );
+    }
 
-        const requestedExecutionDate = transactionDate.format("YYYY-MM-DD");
+    const requestedExecutionDate = transactionDate.format('YYYY-MM-DD');
 
-        const instructionIdentification = uuidv4().replace(/-/g, "");
+    const instructionIdentification = uuidv4().replace(/-/g, '');
 
-        const endToEndIdentification = uuidv4().replace(/-/g, "");
+    const endToEndIdentification = uuidv4().replace(/-/g, '');
 
-        const paymentRequest = {
-          instructionIdentification,
-          endToEndIdentification,
-          requestedExecutionDate,
-          creditorName: "bankIO store",
-          creditorAccount: {
-            iban: "RO03RZBR0000069999999999",
-          },
-          instructedAmount: {
-            amount: formattedAmount,
-            currency: "RON",
-          },
-          creditorAddress: {
-            street: "Fleet Street",
-            buildingNumber: "61A",
-            city: "London",
-            postalCode: "EC4Y1JU",
-            country: "GB",
-          },
-          remittanceInformationUnstructured: "reference no 1",
-          remittanceInformationStructured: {
-            reference: `BANKIO-${moment().format("YYYYMMDDHHmm")}`,
-          },
-        };
+    const paymentRequest = {
+      instructionIdentification,
+      endToEndIdentification,
+      requestedExecutionDate,
+      creditorName: 'bankIO store',
+      creditorAccount: {
+        iban: 'RO03RZBR0000069999999999',
+      },
+      instructedAmount: {
+        amount: formattedAmount,
+        currency: 'RON',
+      },
+      creditorAddress: {
+        street: 'Fleet Street',
+        buildingNumber: '61A',
+        city: 'London',
+        postalCode: 'EC4Y1JU',
+        country: 'GB',
+      },
+      remittanceInformationUnstructured: 'reference no 1',
+      remittanceInformationStructured: {
+        reference: `BANKIO-${moment().format('YYYYMMDDHHmm')}`,
+      },
+    };
 
     return new Promise((resolve, reject) => {
       request.post(
@@ -55,9 +58,9 @@ module.exports = {
           url: ordersEndpoint,
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
-            "TPP-PSU-ID": "user1",
-            'x-request-id': uuidv4()
+            'Content-Type': 'application/json',
+            'TPP-PSU-ID': 'user1',
+            'x-request-id': uuidv4(),
           },
           json: paymentRequest,
         },
@@ -79,7 +82,7 @@ module.exports = {
           url: `${ordersEndpoint}/${orderID}/capture/`,
           headers: {
             Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           json: true,
         },
@@ -87,7 +90,7 @@ module.exports = {
           if (error) return reject(error);
           if (res.statusCode >= 400) return reject(body);
 
-          if (body.status === "COMPLETED") {
+          if (body.status === 'COMPLETED') {
             return resolve(body);
           } else {
             return reject(body);
@@ -98,7 +101,9 @@ module.exports = {
   },
 
   getAccessToken: (clientID, secret) => {
-    const encodedClientCredentials = Buffer.from(`${clientID}:${secret}`).toString("base64");
+    const encodedClientCredentials = Buffer.from(
+      `${clientID}:${secret}`
+    ).toString('base64');
     const authEndpoint = config.urls.sandbox + config.apis.auth;
 
     return new Promise((resolve, reject) => {
@@ -107,9 +112,9 @@ module.exports = {
           url: authEndpoint,
           headers: {
             Authorization: `Basic ${encodedClientCredentials}`,
-            "Content-Type": "application/x-www-form-urlencoded",
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: "grant_type=client_credentials&scope=pisp offline_access",
+          body: 'grant_type=client_credentials&scope=pisp offline_access',
           json: true,
         },
         (error, res, body) => {
@@ -123,7 +128,9 @@ module.exports = {
   },
 
   authorisePaymentAccessToken: (clientID, secret, paymentId, code) => {
-    const encodedClientCredentials = Buffer.from(`${clientID}:${secret}`).toString("base64");
+    const encodedClientCredentials = Buffer.from(
+      `${clientID}:${secret}`
+    ).toString('base64');
     const authEndpoint = config.urls.sandbox + config.apis.auth;
 
     return new Promise((resolve, reject) => {
@@ -132,9 +139,13 @@ module.exports = {
           url: authEndpoint,
           headers: {
             Authorization: `Basic ${encodedClientCredentials}`,
-            "Content-Type": "application/x-www-form-urlencoded",
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: querystring.stringify({ grant_type: "authorization_code", code, redirect_uri: "https://dev.bankio.ro:8000/checkout/callback" }),
+          body: querystring.stringify({
+            grant_type: 'authorization_code',
+            code,
+            redirect_uri: 'https://dev.bankio.ro:8000/checkout/callback',
+          }),
           json: true,
         },
         (error, res, body) => {
@@ -146,6 +157,4 @@ module.exports = {
       );
     });
   },
-
-  
 };

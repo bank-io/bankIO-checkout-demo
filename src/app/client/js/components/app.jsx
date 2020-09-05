@@ -8,76 +8,71 @@ import { Code } from './code';
 import * as patterns from '../patterns';
 
 let layout = [
-    {
-        name: 'Integration',
-    patterns: [patterns.client, patterns.server],
-    },
+  {
+    name: 'Integration',
+    patterns: [patterns.server],
+  },
 
-    {
-        name: 'Features',
-        patterns: [
-      patterns.horizontal,
+  {
+    name: 'Features',
+    patterns: [
       patterns.style,
       patterns.responsive,
+      patterns.validation,
       patterns.radio,
     ],
   },
 ];
 
 export class App extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            env: 'sandbox',
+  constructor() {
+    super();
+    this.state = {
+      env: 'sandbox',
       errors: [],
-        };
-    }
+    };
+  }
 
-    onChangeCode(code) {
-        this.setState({ code, errors: [] });
-    }
+  onChangeCode(code) {
+    this.setState({ code, errors: [] });
+  }
 
-    componentWillMount() {
-        if (window.location.hash === '#/') {
-            window.location.hash = '#/pattern/client';
-        }
-    }
+  onChangeEnv(env) {
+    this.setState({ env });
+  }
 
-    onChangeEnv(env) {
-        this.setState({ env });
-    }
+  onCodeRun(code) {
+    this.setState({ errors: [] });
+  }
 
-    onCodeRun(code) {
-        this.setState({ errors: [] });
-    }
-
-    onCodeError(err) {
+  onCodeError(err) {
     this.setState({
       errors: this.state.errors.concat(err.stack || err.toString()),
     });
+  }
+
+  render() {
+    let patternName = this.props.match.params.pattern || 'server';
+    let activePattern = patterns[patternName];
+
+    if (!activePattern) {
+      activePattern = patterns.server;
     }
 
-    render() {
-        let patternName = this.props.match.params.pattern || 'client';
-        let activePattern = patterns[patternName];
+    let env = this.state.env;
+    let baseURL = document.body.getAttribute('data-base-url');
+    let clientID = document.body.getAttribute('data-client-id');
 
-        if (!activePattern) {
-            activePattern = patterns.client;
-        }
-
-        let env = this.state.env;
-        let baseURL = document.body.getAttribute('data-base-url');
-
-        return (
-            <div>
+    return (
+      <div>
         <Header onChangeEnv={(env) => this.onChangeEnv(env)} />
 
-                <div className="main">
-                    <div className="column-left">
+        <div className="main">
+          <div className="column-left">
             {layout.map((group, i) => (
-                                <div key={i}>
-                                    <h3>{group.name}</h3>
-                                    <ul>
+              <div key={i}>
+                <h3>{group.name}</h3>
+                <ul>
                   {group.patterns.map(
                     (pattern) =>
                       !pattern.nosidebar && (
@@ -86,58 +81,58 @@ export class App extends React.Component {
                           key={pattern.slug}
                           activeClassName="active"
                         >
-                                                    <li>
+                          <li>
                             <span className="bullet" />
-                                                        <span>{ pattern.name }</span>
-                                                    </li>
-                                                </Link>
-                                            )
+                            <span>{pattern.name}</span>
+                          </li>
+                        </Link>
+                      )
                   )}
-                                    </ul>
-                                </div>
+                </ul>
+              </div>
             ))}
-                    </div>
+          </div>
 
-                    <div className="column-middle">
-                        <div className="intro">
-                            <h3>{activePattern.fullName}</h3>
-                            <div className="introp">{activePattern.intro}</div>
-                        </div>
+          <div className="column-middle">
+            <div className="intro">
+              <h3>{activePattern.fullName}</h3>
+              <div className="introp">{activePattern.intro}</div>
+            </div>
 
-                        <div className="demo">
-                            <div className="steps">
-                                <div className="step right">1. Edit the code</div>
+            <div className="demo">
+              <div className="steps">
+                <div className="step right">1. Edit the code</div>
 
-                                <div className="step bottom">2. Try the button</div>
+                <div className="step bottom">2. Try the button</div>
 
                 {this.state.errors.length ? (
                   <div className="errors">
                     {this.state.errors.map((err) => (
-                                                <p key={err}>{err}</p>
+                      <p key={err}>{err}</p>
                     ))}
-                                    </div>
+                  </div>
                 ) : (
                   <Code
-                                        setup={activePattern.setup}
-                                        pattern={patternName}
-                                        code={this.state.code}
+                    setup={activePattern.setup}
+                    pattern={patternName}
+                    code={this.state.code}
                     onError={(err) => this.onCodeError(err)}
                   />
                 )}
 
-                                <div className="step right">3. Copy code to your site!</div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="step right">3. Copy code to your site!</div>
+              </div>
+            </div>
+          </div>
 
-                    <div className="column-right">
+          <div className="column-right">
             <Editor
-              code={activePattern.code({ env, baseURL })}
+              code={activePattern.code({ env, baseURL, clientID })}
               onChange={(val) => this.onChangeCode(val)}
             />
-                    </div>
-                </div>
-            </div>
-        );
-    }
+          </div>
+        </div>
+      </div>
+    );
+  }
 }

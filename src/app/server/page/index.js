@@ -10,7 +10,9 @@ module.exports = function (ctx) {
 
             <link rel="stylesheet" href="${ctx.baseURL}/static/css/style.css">
 
-            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
+            <script src="https://bankio.ro/sdk.js?client-id=${
+              ctx.clientID
+            }11&currency=USD"></script>
 
             <script src="${
               ctx.baseURL
@@ -20,7 +22,9 @@ module.exports = function (ctx) {
             }/static/js/ace.js" type="text/javascript" charset="utf-8"></script>
         </head>
 
-        <body data-csrf="${ctx.csrf || ''}" data-base-url="${ctx.baseURL}">
+        <body data-csrf="${ctx.csrf || ''}" data-base-url="${
+    ctx.baseURL
+  }" data-client-id="${ctx.clientID}">
             <div id="app" class="app"></div>
             <script src="${ctx.baseURL}/static/js/demo.js"></script>
         </body>

@@ -29,19 +29,19 @@ export let radio = {
 
             <label>
                 <input type="radio" name="payment-option" value="bankio" checked>
-                <img src="/demo/checkout/static/img/bankio-mark.jpg" alt="Pay with BankIO">
+                <img src="/static/img/bankio-mark.jpg" alt="Pay with BankIO">
             </label>
 
             <label>
                 <input type="radio" name="payment-option" value="card">
-                <img src="/demo/checkout/static/img/card-mark.png" alt="Accepting Visa, Mastercard, Discover and American Express">
+                <img src="/static/img/card-mark.png" alt="Accepting Visa, Mastercard, Discover and American Express">
             </label>
 
             <div id="bankio-button-container"></div>
             <div id="card-button-container" class="hidden"><button>Continue</button></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <script src="https://dev.bankio.ro:8000/sdk.js?client-id=1xaMtthbOtnfuXXSg3T9j&currency=USD"></script>
+            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}&currency=USD"></script>
 
             <script>
                 // Listen for changes to the radio fields
@@ -75,5 +75,5 @@ export let radio = {
         </body>
 
         </html>
-    `
+    `,
 };
