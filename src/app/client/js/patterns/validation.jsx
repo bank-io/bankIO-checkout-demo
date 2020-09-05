@@ -1,19 +1,19 @@
-
 import React from 'react';
 
 export let validation = {
+  slug: 'validation',
 
-    slug: 'validation',
+  name: `Validation`,
 
-    name: `Validation`,
+  fullName: `Validation integration`,
 
-    fullName: `Validation integration`,
+  intro: (
+    <p>
+      Create <b>Smart Payment Buttons</b>
+    </p>
+  ),
 
-    intro: (
-        <p>Create <b>Smart Payment Buttons</b></p>
-    ),
-
-    code: (ctx) => `
+  code: (ctx) => `
         <!DOCTYPE html>
 
         <head>
@@ -72,5 +72,5 @@ export let validation = {
                 }).render('#bankio-button-container');
             </script>
         </body>
-    `
+    `,
 };

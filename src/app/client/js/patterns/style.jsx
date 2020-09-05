@@ -47,5 +47,5 @@ export let style = {
         </body>
 
         </html>
-    `
+    `,
 };

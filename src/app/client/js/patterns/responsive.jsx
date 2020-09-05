@@ -54,5 +54,5 @@ export let responsive = {
         </body>
 
         </html>
-    `
+    `,
 };

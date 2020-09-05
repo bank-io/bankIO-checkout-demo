@@ -92,5 +92,5 @@ export let server = {
         </body>
 
         </html>
-    `
+    `,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { App } from './components/app';
 import { render } from 'react-dom';
-import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
+import { HashRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 const fetchMonkeyPatch = window.fetch;
 function newFetch(url, options, ...args) {

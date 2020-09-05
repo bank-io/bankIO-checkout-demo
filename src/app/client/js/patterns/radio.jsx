@@ -75,5 +75,5 @@ export let radio = {
         </body>
 
         </html>
-    `
+    `,
 };
