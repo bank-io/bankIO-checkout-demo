@@ -9,7 +9,12 @@ export let style = {
 
   intro: (
     <p>
-      Create <b>Smart Payment Buttons</b> with different styles
+      Create <b>Smart Payment Buttons</b> with different styles.
+      <br />
+      <br />
+      This is a feature example, check{' '}
+      <a href="/#/pattern/server">the server page</a> for the server-side order
+      integration.
     </p>
   ),
 
@@ -29,19 +34,19 @@ export let style = {
             <div id="bankio-button-container"></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}&currency=USD"></script>
+            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}"></script>
 
             <script>
                 // Render the BankIO button into #bankio-button-container
                 bankio.Buttons({
 
                     style: {
-                        color:  'blue',
-                        shape:  'pill',
-                        label:  'pay',
+                        color:  'gold', // gold, blue, silver, white, black
+                        shape:  'pill', // pill, rect
+                        label:  'checkout', // checkout, pay, buynow, bankio
                         height: 40
                     }
-
+                    
                 }).render('#bankio-button-container');
             </script>
         </body>

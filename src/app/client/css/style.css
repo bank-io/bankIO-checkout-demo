@@ -426,3 +426,13 @@ a.active .bullet {
     transform: rotate(359deg);
   }
 }
+
+.app .main .column-middle .introp a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.app .main .column-middle .introp a:hover {
+  color: #007bff;
+  text-decoration: underline;
+}
