@@ -144,7 +144,7 @@ module.exports = {
           body: querystring.stringify({
             grant_type: 'authorization_code',
             code,
-            redirect_uri: 'https://dev.bankio.ro:8000/checkout/callback',
+            redirect_uri: 'https://bankio.ro/checkout/callback/',
           }),
           json: true,
         },
