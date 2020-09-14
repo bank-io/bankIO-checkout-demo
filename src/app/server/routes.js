@@ -41,7 +41,6 @@ module.exports = function (app) {
   app.post('/api/bankio/order/:id/authorised/', (req, res) => {
     const paymentId = req.params.id;
     const { clientID, secret } = req.sandboxCredentials;
-    console.log('test');
 
     return bankio
       .authorisePaymentAccessToken(clientID, secret, paymentId, req.body.code)
@@ -61,7 +60,6 @@ module.exports = function (app) {
   app.post('/api/bankio/order/:id/capture/', (req, res) => {
     const orderID = req.params.id;
     const { clientID, secret } = req.sandboxCredentials;
-    console.log('test');
 
     return bankio
       .getAccessToken(clientID, secret)

@@ -48,7 +48,6 @@ export let server = {
 
                     // Call your server to finalize the transaction
                     onApprove: function(data, actions) {
-                        console.log('data', data)
                         return fetch('/api/bankio/order/' + data.paymentId + '/authorised/', {
                             method: 'post',
                             headers: {
