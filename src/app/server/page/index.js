@@ -12,7 +12,7 @@ module.exports = function (ctx) {
 
             <script src="https://bankio.ro/sdk.js?client-id=${
               ctx.clientID
-            }11&currency=USD"></script>
+            }"></script>
 
             <script src="${
               ctx.baseURL

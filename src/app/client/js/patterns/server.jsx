@@ -29,7 +29,7 @@ export let server = {
             <div id="bankio-button-container"></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}&currency=USD"></script>
+            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}"></script>
 
             <script>
                 // Render the BankIO button into #bankio-button-container
@@ -48,7 +48,6 @@ export let server = {
 
                     // Call your server to finalize the transaction
                     onApprove: function(data, actions) {
-                        console.log('data', data)
                         return fetch('/api/bankio/order/' + data.paymentId + '/authorised/', {
                             method: 'post',
                             headers: {
@@ -83,6 +82,7 @@ export let server = {
 
                             // Show a success message to the buyer
                             alert('Transaction completed by ' + orderData);
+                            console.log('orderData', orderData);
                         });
                     }
 

@@ -10,6 +10,11 @@ export let responsive = {
   intro: (
     <p>
       Create responsive <b>Smart Payment Buttons</b>
+      <br />
+      <br />
+      This is a feature example, check{' '}
+      <a href="/#/pattern/server">the server page</a> for the server-side order
+      integration.
     </p>
   ),
 
@@ -45,7 +50,7 @@ export let responsive = {
             <div id="bankio-button-container"></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}&currency=USD"></script>
+            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}"></script>
 
             <script>
                 // Render the BankIO button into #bankio-button-container

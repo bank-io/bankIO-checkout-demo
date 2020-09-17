@@ -10,6 +10,11 @@ export let radio = {
   intro: (
     <p>
       Create <b>Smart Payment Buttons</b> with radio fields
+      <br />
+      <br />
+      This is a feature example, check{' '}
+      <a href="/#/pattern/server">the server page</a> for the server-side order
+      integration.
     </p>
   ),
 
@@ -41,7 +46,7 @@ export let radio = {
             <div id="card-button-container" class="hidden"><button>Continue</button></div>
 
             <!-- Include the BankIO JavaScript SDK -->
-            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}&currency=USD"></script>
+            <script src="https://bankio.ro/sdk.js?client-id=${ctx.clientID}"></script>
 
             <script>
                 // Listen for changes to the radio fields
