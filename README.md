@@ -27,20 +27,28 @@ $ docker-compose up
 
 ### Run locally at command line
 
+```sh
+$ yarn install
+```
+
+#### Environment variables
+
+Copy [.env.example](.env.example) file as .env and populate the environment variables.
+
 #### Download project requirements
 
 ```sh
-$ npm install
+$ yarn install
 ```
 
 #### Build the React app
 
 ```sh
-$ npm run build
+$ yarn build
 ```
 
 #### Start the app
 
 ```sh
-$ node src/app/server
+$ yarn start
 ```
