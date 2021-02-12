@@ -7,8 +7,7 @@ const config = require('./config');
 const PORT = 8002;
 const serverConfig = {
   sandboxCredentials: {
-    clientID:
-      process.env.BANKIO_CHECKOUT_DEMO_CLIENT_ID || config.client.sandbox,
+    clientID: process.env.BANKIO_CHECKOUT_DEMO_CLIENT_ID || '',
     secret: process.env.BANKIO_CHECKOUT_DEMO_CLIENT_SECRET || '',
   },
 };
