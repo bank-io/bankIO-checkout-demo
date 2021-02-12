@@ -32,3 +32,4 @@ flow-typed
 
 .DS_Store
 .env
+src/app/build/

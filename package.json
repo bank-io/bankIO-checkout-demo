@@ -11,8 +11,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier . --write",
-    "start": "node src/app/server",
-    "start:dev": "webpack-dev-server --config webpack.conf.js",
+    "start": "node -r dotenv/config src/app/server",
+    "start:dev": "node -r dotenv/config node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.conf.js",
     "test": " "
   },
   "repository": {
@@ -49,6 +49,7 @@
     "belter": "^1.0.92",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
+    "dotenv": "^8.2.0",
     "moment": "^2.27.0",
     "querystring": "^0.2.0",
     "react": "^16",

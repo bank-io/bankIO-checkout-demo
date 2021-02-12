@@ -5,8 +5,8 @@ const moment = require('moment');
 const querystring = require('querystring');
 
 module.exports = {
-  createOrder: (accessToken) => {
-    const ordersEndpoint = config.urls.sandbox + config.apis.orders;
+  createPayment: (accessToken) => {
+    const paymentsEndpoint = config.urls.sandbox + config.apis.payments;
 
     const amount = 10;
 
@@ -55,7 +55,7 @@ module.exports = {
     return new Promise((resolve, reject) => {
       request.post(
         {
-          url: ordersEndpoint,
+          url: paymentsEndpoint,
           headers: {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
@@ -69,32 +69,6 @@ module.exports = {
           if (res.statusCode >= 400) return reject(body);
 
           return resolve(body && body.paymentId);
-        }
-      );
-    });
-  },
-
-  captureOrder: (accessToken, orderID) => {
-    const ordersEndpoint = config.urls.sandbox + config.apis.orders;
-    return new Promise((resolve, reject) => {
-      request.post(
-        {
-          url: `${ordersEndpoint}/${orderID}/capture/`,
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          json: true,
-        },
-        (error, res, body) => {
-          if (error) return reject(error);
-          if (res.statusCode >= 400) return reject(body);
-
-          if (body.status === 'COMPLETED') {
-            return resolve(body);
-          } else {
-            return reject(body);
-          }
         }
       );
     });
@@ -152,7 +126,31 @@ module.exports = {
           if (error) return reject(error);
           if (res.statusCode >= 400) return reject(body);
 
-          resolve(body && body.access_token);
+          // resolve(body && body.access_token);
+
+          const paymentStatusEndpoint =
+            config.urls.sandbox +
+            config.apis.payments +
+            '/' +
+            paymentId +
+            '/status';
+
+          request.get(
+            {
+              url: paymentStatusEndpoint,
+              headers: {
+                Authorization: `Bearer ${body.access_token}`,
+                'Content-Type': 'application/json',
+                'x-request-id': uuidv4(),
+              },
+            },
+            (error, res, body) => {
+              if (error) return reject(error);
+              if (res.statusCode >= 400) return reject(body);
+
+              return resolve(body);
+            }
+          );
         }
       );
     });
