@@ -14,6 +14,10 @@ module.exports = function (options) {
     express.static(path.join(__dirname, '../build'), { maxAge: 86400000 })
   );
   app.use(
+    '/static/js',
+    express.static(path.join(__dirname, '../static/js'), { maxAge: 86400000 })
+  );
+  app.use(
     '/static',
     express.static(path.join(__dirname, '../client'), { maxAge: 86400000 })
   );
