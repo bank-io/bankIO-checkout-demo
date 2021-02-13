@@ -1,11 +1,12 @@
 import * as patterns from '../patterns';
 
-import { Link, useLocation } from '@reach/router';
 import React, { useState } from 'react';
 
 import { Code } from './code';
 import { Editor } from './editor';
 import { Header } from './header';
+import { Link } from 'components/router';
+import { useSmartButtonsConfig } from './SmartButtonsConfigProvider';
 
 let layout = [
   {
@@ -24,7 +25,7 @@ let layout = [
   },
 ];
 
-export const App = (props) => {
+export const App = ({ pattern, showLogo }) => {
   const [env, setEnv] = useState('sandbox');
   const [errors, setErrors] = useState([]);
   const [code, setCode] = useState(null);
@@ -47,17 +48,14 @@ export const App = (props) => {
     setErrors((errors) => errors.concat(err.stack || err.toString()));
   }
 
-  const location = useLocation();
-
-  let patternName = props.pattern || 'server';
+  let patternName = pattern;
   let activePattern = patterns[patternName];
 
   if (!activePattern) {
     activePattern = patterns.server;
   }
 
-  let baseURL = document.body.getAttribute('data-base-url');
-  let clientID = document.body.getAttribute('data-client-id');
+  const { baseURL, clientID } = useSmartButtonsConfig();
 
   const isActive = ({ isCurrent }) => {
     return isCurrent ? { className: 'active' } : {};
@@ -65,7 +63,7 @@ export const App = (props) => {
 
   return (
     <div>
-      <Header onChangeEnv={(env) => onChangeEnv(env)} />
+      <Header showLogo={showLogo} onChangeEnv={(env) => onChangeEnv(env)} />
 
       <div className="main">
         <div className="column-left">
@@ -78,7 +76,7 @@ export const App = (props) => {
                     !pattern.nosidebar && (
                       <Link
                         getProps={isActive}
-                        to={`/pattern/${pattern.slug}`}
+                        to={`/smart-payment-buttons/${pattern.slug}`}
                         key={pattern.slug}
                       >
                         <li>
@@ -134,4 +132,9 @@ export const App = (props) => {
       </div>
     </div>
   );
+};
+
+App.defaultProps = {
+  pattern: 'server',
+  showLogo: true,
 };

@@ -13,8 +13,8 @@ export let radio = {
       <br />
       <br />
       This is a feature example, check{' '}
-      <a href="/#/pattern/server">the server page</a> for the server-side order
-      integration.
+      <a href="/smart-payment-buttons/server">the server page</a> for the
+      server-side order integration.
     </p>
   ),
 
