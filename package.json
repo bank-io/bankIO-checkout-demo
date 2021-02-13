@@ -54,6 +54,7 @@
     "moment": "^2.27.0",
     "querystring": "^0.2.0",
     "react": "^16",
+    "react-ace": "^9.3.0",
     "react-dom": "^16",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.2.0",

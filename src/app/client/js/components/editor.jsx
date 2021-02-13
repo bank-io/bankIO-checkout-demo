@@ -1,52 +1,59 @@
-import React from 'react';
+// import-sort-ignore
 
-import { stripIndent, debounce } from '../lib';
+import React, { useCallback, useEffect, useState } from 'react';
+import { debounce, stripIndent } from '../lib';
 
-export class Editor extends React.Component {
-  render() {
-    return <div id="editor" className="editor"></div>;
-  }
+import AceEditor from 'react-ace';
+import 'ace-builds/src-noconflict/mode-html';
+import 'ace-builds/src-noconflict/theme-monokai';
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      code: stripIndent(props.code),
-    };
-  }
+export const Editor = React.forwardRef((props, ref) => {
+  const [code, setCode] = useState(stripIndent(props.code));
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return this.props.code !== nextProps.code;
-  }
+  const onChange = useCallback(
+    debounce((newValue) => {
+      setCode(newValue);
 
-  componentDidMount() {
-    let editor = ace.edit('editor');
-    editor.setTheme('ace/theme/monokai');
-    editor.getSession().setMode('ace/mode/html');
-    editor.setShowPrintMargin(false);
-    editor.$blockScrolling = Infinity;
+      let value = newValue;
+      if (props.onChange && value && value !== stripIndent(props.code)) {
+        props.onChange(value);
+      }
+    }, 300),
+    [props]
+  );
 
-    editor.getSession().on(
-      'change',
-      debounce(() => {
-        let value = editor.getValue();
-        if (
-          this.props.onChange &&
-          value &&
-          value !== stripIndent(this.props.code)
-        ) {
-          this.props.onChange(value);
-        }
-      }, 300)
-    );
+  useEffect(() => {
+    if (props.onChange) {
+      props.onChange(props.code);
+    }
+  }, []);
 
-    editor.setValue(stripIndent(this.props.code), -1);
-    this.props.onChange(this.props.code);
+  useEffect(() => {
+    setCode(stripIndent(props.code));
 
-    this.setState({ editor: editor });
-  }
+    if (props.onChange) {
+      props.onChange(props.code);
+    }
+  }, [props.code]);
 
-  componentWillUpdate(nextProps, nextState) {
-    nextState.editor.setValue(stripIndent(nextProps.code), -1);
-    this.props.onChange(nextProps.code);
-  }
-}
+  return (
+    <AceEditor
+      ref={ref}
+      className="editor"
+      mode="html"
+      theme="monokai"
+      onChange={onChange}
+      name="editor"
+      editorProps={{ $blockScrolling: Infinity }}
+      value={code}
+      width="100%"
+      height="100%"
+      setOptions={{
+        // enableBasicAutocompletion: true,
+        // enableLiveAutocompletion: true,
+        // enableSnippets: true
+        showPrintMargin: false,
+      }}
+    />
+  );
+});

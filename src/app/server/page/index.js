@@ -17,9 +17,6 @@ module.exports = function (ctx) {
             <script src="${
               ctx.baseURL
             }/static/js/fetch.min.js" type="text/javascript" charset="utf-8"></script>
-            <script src="${
-              ctx.baseURL
-            }/static/js/ace.js" type="text/javascript" charset="utf-8"></script>
         </head>
 
         <body data-csrf="${ctx.csrf || ''}" data-base-url="${
