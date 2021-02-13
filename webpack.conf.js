@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
   entry: path.resolve(__dirname, 'src/app/client/js/index.jsx'),
-  mode: 'production',
+  mode: 'development',
   module: {
     rules: [
       {
@@ -25,6 +25,9 @@ module.exports = {
     filename: 'demo.js',
   },
   resolve: {
+    alias: {
+      components: path.resolve(__dirname, 'src/app/client/js/components'),
+    },
     extensions: ['.js', '.jsx'],
   },
 };

@@ -20,13 +20,13 @@ let baseURL = document.body.getAttribute('data-base-url');
 let clientID = document.body.getAttribute('data-client-id');
 
 render(
-  <Router component={({ children }) => <>{children}</>}>
-    <Redirect exact from="/" to="/smart-payment-buttons/server" />
-    <SmartButtonsConfigProvider smartButtonsConfig={{ baseURL, clientID }}>
+  <SmartButtonsConfigProvider smartButtonsConfig={{ baseURL, clientID }}>
+    <Router component={({ children }) => <>{children}</>}>
+      <Redirect exact from="/" to="/smart-payment-buttons/server" />
       <App path="/smart-payment-buttons/:pattern" />
-    </SmartButtonsConfigProvider>
-    <Redirect from="*" to="/smart-payment-buttons/server" />
-  </Router>,
+      <Redirect from="*" to="/smart-payment-buttons/server" />
+    </Router>
+  </SmartButtonsConfigProvider>,
   document.getElementById('app')
 );
 
