@@ -48,7 +48,11 @@ export const Editor = React.forwardRef((props, ref) => {
   }, [props.code]);
 
   //ssr
-  if (typeof AceEditor == 'undefined' || !AceEditor) {
+  if (
+    typeof AceEditor == 'undefined' ||
+    !AceEditor ||
+    typeof window == 'undefined'
+  ) {
     return null;
   }
 
