@@ -43,6 +43,11 @@ export const Editor = React.forwardRef((props, ref) => {
     }
   }, [props.code]);
 
+  //ssr
+  if (!AceEditor) {
+    return null;
+  }
+
   return (
     <AceEditor
       ref={ref}
