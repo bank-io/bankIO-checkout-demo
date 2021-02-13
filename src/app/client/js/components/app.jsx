@@ -1,11 +1,11 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-
-import { Header } from './header';
-import { Editor } from './editor';
-import { Code } from './code';
-
 import * as patterns from '../patterns';
+
+import { Link, useLocation } from '@reach/router';
+import React, { useState } from 'react';
+
+import { Code } from './code';
+import { Editor } from './editor';
+import { Header } from './header';
 
 let layout = [
   {
@@ -24,115 +24,114 @@ let layout = [
   },
 ];
 
-export class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      env: 'sandbox',
-      errors: [],
-    };
+export const App = (props) => {
+  const [env, setEnv] = useState('sandbox');
+  const [errors, setErrors] = useState([]);
+  const [code, setCode] = useState(null);
+
+  function onChangeCode(code) {
+    setCode(code);
+
+    setErrors([]);
   }
 
-  onChangeCode(code) {
-    this.setState({ code, errors: [] });
+  function onChangeEnv(env) {
+    setEnv(env);
   }
 
-  onChangeEnv(env) {
-    this.setState({ env });
+  function onCodeRun(code) {
+    setErrors([]);
   }
 
-  onCodeRun(code) {
-    this.setState({ errors: [] });
+  function onCodeError(err) {
+    setErrors((errors) => errors.concat(err.stack || err.toString()));
   }
 
-  onCodeError(err) {
-    this.setState({
-      errors: this.state.errors.concat(err.stack || err.toString()),
-    });
+  const location = useLocation();
+
+  let patternName = props.pattern || 'server';
+  let activePattern = patterns[patternName];
+
+  if (!activePattern) {
+    activePattern = patterns.server;
   }
 
-  render() {
-    let patternName = this.props.match.params.pattern || 'server';
-    let activePattern = patterns[patternName];
+  let baseURL = document.body.getAttribute('data-base-url');
+  let clientID = document.body.getAttribute('data-client-id');
 
-    if (!activePattern) {
-      activePattern = patterns.server;
-    }
+  const isActive = ({ isCurrent }) => {
+    return isCurrent ? { className: 'active' } : {};
+  };
 
-    let env = this.state.env;
-    let baseURL = document.body.getAttribute('data-base-url');
-    let clientID = document.body.getAttribute('data-client-id');
+  return (
+    <div>
+      <Header onChangeEnv={(env) => onChangeEnv(env)} />
 
-    return (
-      <div>
-        <Header onChangeEnv={(env) => this.onChangeEnv(env)} />
-
-        <div className="main">
-          <div className="column-left">
-            {layout.map((group, i) => (
-              <div key={i}>
-                <h3>{group.name}</h3>
-                <ul>
-                  {group.patterns.map(
-                    (pattern) =>
-                      !pattern.nosidebar && (
-                        <Link
-                          to={`/pattern/${pattern.slug}`}
-                          key={pattern.slug}
-                          activeClassName="active"
-                        >
-                          <li>
-                            <span className="bullet" />
-                            <span>{pattern.name}</span>
-                          </li>
-                        </Link>
-                      )
-                  )}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="column-middle">
-            <div className="intro">
-              <h3>{activePattern.fullName}</h3>
-              <div className="introp">{activePattern.intro}</div>
-            </div>
-
-            <div className="demo">
-              <div className="steps">
-                <div className="step right">1. Edit the code</div>
-
-                <div className="step bottom">2. Try the button</div>
-
-                {this.state.errors.length ? (
-                  <div className="errors">
-                    {this.state.errors.map((err) => (
-                      <p key={err}>{err}</p>
-                    ))}
-                  </div>
-                ) : (
-                  <Code
-                    setup={activePattern.setup}
-                    pattern={patternName}
-                    code={this.state.code}
-                    onError={(err) => this.onCodeError(err)}
-                  />
+      <div className="main">
+        <div className="column-left">
+          {layout.map((group, i) => (
+            <div key={i}>
+              <h3>{group.name}</h3>
+              <ul>
+                {group.patterns.map(
+                  (pattern) =>
+                    !pattern.nosidebar && (
+                      <Link
+                        getProps={isActive}
+                        to={`/pattern/${pattern.slug}`}
+                        key={pattern.slug}
+                      >
+                        <li>
+                          <span className="bullet" />
+                          <span>{pattern.name}</span>
+                        </li>
+                      </Link>
+                    )
                 )}
-
-                <div className="step right">3. Copy code to your site!</div>
-              </div>
+              </ul>
             </div>
+          ))}
+        </div>
+
+        <div className="column-middle">
+          <div className="intro">
+            <h3>{activePattern.fullName}</h3>
+            <div className="introp">{activePattern.intro}</div>
           </div>
 
-          <div className="column-right">
-            <Editor
-              code={activePattern.code({ env, baseURL, clientID })}
-              onChange={(val) => this.onChangeCode(val)}
-            />
+          <div className="demo">
+            <div className="steps">
+              <div className="step right">1. Edit the code</div>
+
+              <div className="step bottom">2. Try the button</div>
+
+              {errors.length ? (
+                <div className="errors">
+                  {errors.map((err) => (
+                    <p key={err}>{err}</p>
+                  ))}
+                </div>
+              ) : (
+                <Code
+                  setup={activePattern.setup}
+                  pattern={patternName}
+                  code={code}
+                  onError={(err) => onCodeError(err)}
+                />
+              )}
+
+              <div className="step right">3. Copy code to your site!</div>
+            </div>
           </div>
         </div>
+
+        <div className="column-right">
+          <Editor
+            code={activePattern.code({ env, baseURL, clientID })}
+            onChange={(val) => onChangeCode(val)}
+          />
+        </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};

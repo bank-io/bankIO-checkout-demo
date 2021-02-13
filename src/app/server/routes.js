@@ -3,7 +3,7 @@ const bankio = require('./lib/bankio');
 const index = require('./page/index');
 
 module.exports = function (app) {
-  app.get('/', (req, res) => {
+  app.get(['/', '/pattern/:pattern'], (req, res) => {
     res.header(
       'Content-Security-Policy',
       `default-src 'self' 'unsafe-inline' 'unsafe-eval' data: https://*.bankio.ro https://*.bankio.ro:8000 https://bankio.ro https://bankio.co.uk;`
