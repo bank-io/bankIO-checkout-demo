@@ -37,10 +37,16 @@ module.exports = function (app, urlPath) {
 
   router.post('/openbanking/order/:id/authorised/', (req, res) => {
     const paymentId = req.params.id;
-    const { clientID, secret } = req.sandboxCredentials;
+    const { clientID, secret, organisation } = req.sandboxCredentials;
 
     return bankio
-      .authorisePaymentAccessToken(clientID, secret, paymentId, req.body.code)
+      .authorisePaymentAccessToken(
+        organisation,
+        clientID,
+        secret,
+        paymentId,
+        req.body.code
+      )
       .then((response) => {
         res.json(response);
       })
