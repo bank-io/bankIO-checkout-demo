@@ -6,10 +6,14 @@ import { debounce, stripIndent } from '../lib';
 import AceEditor from 'react-ace';
 
 import jsWorkerUrl from 'file-loader!ace-builds/src-noconflict/worker-javascript';
-ace.config.setModuleUrl('ace/mode/javascript_worker', jsWorkerUrl);
+if (typeof ace != 'undefined') {
+  ace.config.setModuleUrl('ace/mode/javascript_worker', jsWorkerUrl);
+}
 
 import htmlWorkerUrl from 'file-loader!ace-builds/src-noconflict/worker-html';
-ace.config.setModuleUrl('ace/mode/html_worker', htmlWorkerUrl);
+if (typeof ace != 'undefined') {
+  ace.config.setModuleUrl('ace/mode/html_worker', htmlWorkerUrl);
+}
 
 import 'ace-builds/src-noconflict/mode-html';
 import 'ace-builds/src-noconflict/theme-monokai';
@@ -42,6 +46,15 @@ export const Editor = React.forwardRef((props, ref) => {
       props.onChange(props.code);
     }
   }, [props.code]);
+
+  //ssr
+  if (
+    typeof AceEditor == 'undefined' ||
+    !AceEditor ||
+    typeof window == 'undefined'
+  ) {
+    return null;
+  }
 
   return (
     <AceEditor
