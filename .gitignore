@@ -33,3 +33,4 @@ flow-typed
 .DS_Store
 .env
 src/app/build/
+dist-firebase

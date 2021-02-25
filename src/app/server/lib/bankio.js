@@ -5,8 +5,9 @@ const moment = require('moment');
 const querystring = require('querystring');
 
 module.exports = {
-  createPayment: (accessToken) => {
-    const paymentsEndpoint = config.urls.sandbox + config.apis.payments;
+  createPayment: (organisation, accessToken) => {
+    const paymentsEndpoint =
+      config.urls.sandbox + `/api/org/${organisation}` + config.apis.payments;
 
     const amount = 10;
 
@@ -60,6 +61,7 @@ module.exports = {
             Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
             'TPP-PSU-ID': 'user1',
+            'psu-ip-address': '192.168.0.1',
             'x-request-id': uuidv4(),
           },
           json: paymentRequest,
@@ -101,7 +103,13 @@ module.exports = {
     });
   },
 
-  authorisePaymentAccessToken: (clientID, secret, paymentId, code) => {
+  authorisePaymentAccessToken: (
+    organisation,
+    clientID,
+    secret,
+    paymentId,
+    code
+  ) => {
     const encodedClientCredentials = Buffer.from(
       `${clientID}:${secret}`
     ).toString('base64');
@@ -130,6 +138,7 @@ module.exports = {
 
           const paymentStatusEndpoint =
             config.urls.sandbox +
+            `/api/org/${organisation}` +
             config.apis.payments +
             '/' +
             paymentId +

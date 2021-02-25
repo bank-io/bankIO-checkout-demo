@@ -7,16 +7,26 @@ module.exports = {
     rules: [
       {
         test: /sinon\.js$/,
-        loader: 'imports?define=>false,require=>false',
+        use: {
+          loader: 'imports',
+          options: {
+            define: false,
+            require: false,
+          },
+        },
       },
       {
         test: /\.jsx?$/,
         exclude: /(sinon|chai)/,
-        loader: 'babel-loader',
+        use: {
+          loader: 'babel-loader',
+        },
       },
       {
         test: /\.(html?|css|json|svg)$/,
-        loader: 'raw-loader',
+        use: {
+          loader: 'raw-loader',
+        },
       },
     ],
   },

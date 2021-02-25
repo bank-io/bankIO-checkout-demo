@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const routes = require('./routes');
+const apiRoutes = require('./apiRoutes');
 
 module.exports = function (options) {
   options = options || {};
@@ -35,6 +36,7 @@ module.exports = function (options) {
     }.bind(this)
   );
 
+  apiRoutes(app, '/api');
   routes(app);
 
   return app;

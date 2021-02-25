@@ -5,6 +5,6 @@ module.exports = {
 
   apis: {
     auth: '/api/auth/token',
-    payments: `/api/org/${process.env.BANKIO_CHECKOUT_DEMO_ORGANISATION}/v1/payments/sepa-credit-transfers`,
+    payments: `/v1/payments/sepa-credit-transfers`,
   },
 };
