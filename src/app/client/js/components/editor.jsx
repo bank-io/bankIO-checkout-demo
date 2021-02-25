@@ -67,7 +67,7 @@ export const Editor = React.forwardRef((props, ref) => {
       editorProps={{ $blockScrolling: Infinity }}
       value={code}
       width="100%"
-      height="100%"
+      height="100vh"
       setOptions={{
         // enableBasicAutocompletion: true,
         // enableLiveAutocompletion: true,
