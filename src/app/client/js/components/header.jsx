@@ -1,5 +1,5 @@
-import Button from '@material-ui/core/Button';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import Button from '@mui/material/Button';
+import GitHubIcon from '@mui/icons-material/GitHub';
 import React from 'react';
 import { Toggle } from './toggle';
 
